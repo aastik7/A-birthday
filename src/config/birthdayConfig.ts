@@ -59,7 +59,7 @@ const birthdayConfig: BirthdayConfig = {
     "creative": "Your approach to problem solving is creative and fun instead of boring and calculated",
     "kind-hearted": "Kindess doens't come in one color or shape you showed me a lot of it and showed me there are ways you can show it that I didn't think was traditionally possible.",
     "Hard-Working": "Your dedication and work ethic inspire everyone - you never give up on your goals! NOMMIES",
-    "inspiring": "You have this amazing ability to motivate and uplift others just by being yourself."
+    "inspiring": "You always doubt yourself but you know when you put your mind to something you go above and beyond to excel in it people around you are aware of this but it's funny how you love to keep yourself humble with your anxiety lol"
   },
 
   // [CUSTOMIZE] Add hobbies and interests

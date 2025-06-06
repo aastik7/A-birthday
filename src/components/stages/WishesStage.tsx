@@ -274,6 +274,9 @@ export default function WishesStage({
                   🎮 Discord Nitro Gift
                 </motion.a>
                 
+                {/* COMMENTED OUT - Spotify Gift Card Button */}
+                {/* Uncomment this section to enable Spotify gift card */}
+                {/*
                 <motion.div
                   className="birthday-button bg-green-500 hover:bg-green-600 text-white px-6 py-3 text-lg cursor-pointer"
                   whileHover={{ scale: 1.05 }}
@@ -282,9 +285,12 @@ export default function WishesStage({
                 >
                   🎵 Spotify Gift Card
                 </motion.div>
+                */}
               </div>
 
-              {/* Spotify Gift Code Modal */}
+              {/* COMMENTED OUT - Spotify Gift Code Modal */}
+              {/* Uncomment this section along with the button above to enable Spotify gift card */}
+              {/*
               <AnimatePresence>
                 {showSpotifyCode && (
                   <motion.div
@@ -334,6 +340,7 @@ export default function WishesStage({
                   </motion.div>
                 )}
               </AnimatePresence>
+              */}
               
 
             </div>
