@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Nunito:wght@300;400;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* [CUSTOMIZE] Theme variables - automatically set from birthdayConfig */
+:root {
+  --primary-color: #FF6B8B;
+  --secondary-color: #5A3E7D;
+  --accent-color: #FFE66D;
+  --background-color: #FFF5F8;
+  --text-color: #1a1a2e;
+  --font-family: 'Comic Neue', 'Nunito', sans-serif;
+  
+  /* Animation variables */
+  --bounce-timing: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-out-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-family);
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+body {
+  background: linear-gradient(135deg, 
+    var(--background-color) 0%, 
+    rgba(255, 107, 139, 0.1) 50%, 
+    var(--background-color) 100%
+  );
+  min-height: 100vh;
+}
+
+/* Custom components */
+@layer components {
+  /* Update these classes */
+  .birthday-container {
+    @apply min-h-screen flex flex-col items-center justify-center p-4 relative;
+    background: linear-gradient(135deg, 
+      #fce7f3 0%,   /* Light pink */
+      #fbcfe8 25%,  /* Soft pink */
+      #f9a8d4 50%,  /* Medium pink */
+      #ec4899 75%,  /* Bright pink */
+      #be185d 100%  /* Deep pink */
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease-in-out infinite;
+    overflow: hidden;
+  }
+  
+  .birthday-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      /* Hello Kitty bow pattern */
+      radial-gradient(circle at 20% 20%, rgba(255, 182, 193, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 80% 80%, rgba(255, 105, 180, 0.2) 3px, transparent 3px),
+      radial-gradient(circle at 40% 60%, rgba(255, 20, 147, 0.1) 1px, transparent 1px);
+    background-size: 100px 100px, 150px 150px, 80px 80px;
+    animation: floatPattern 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .birthday-container::after {
+    content: '🎀';
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.1;
+    animation: floatingBows 15s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* Floating Hello Kitty elements */
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  @keyframes floatPattern {
+    0% { transform: translateX(-100px) translateY(-100px); }
+    100% { transform: translateX(100px) translateY(100px); }
+  }
+  
+  @keyframes floatingBows {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      left: -5%;
+    }
+    25% {
+      left: 25%;
+      transform: translateY(75vh) rotate(90deg);
+    }
+    50% {
+      left: 50%;
+      transform: translateY(50vh) rotate(180deg);
+    }
+    75% {
+      left: 75%;
+      transform: translateY(25vh) rotate(270deg);
+    }
+    100% {
+      transform: translateY(-10vh) rotate(360deg);
+      left: 105%;
+    }
+  }
+  
+  /* Ensure content stays above background */
+  .birthday-card {
+    position: relative;
+    z-index: 10;
+    @apply bg-white rounded-3xl shadow-2xl p-6 md:p-8 max-w-4xl w-full my-4;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    box-shadow: 
+      0 25px 50px -12px rgba(255, 107, 139, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Add this to ensure text blocks are readable */
+  .birthday-text {
+    @apply text-center leading-relaxed font-bold;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    background-color: rgba(51, 65, 85, 0.7) !important;
+    padding: 0.5rem !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .birthday-button {
+    @apply px-8 py-4 rounded-full font-bold text-white transition-all duration-300;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 8px 25px rgba(255, 107, 139, 0.3);
+    transform: translateY(0);
+  }
+
+  .birthday-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(255, 107, 139, 0.4);
+  }
+
+  .birthday-button:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(255, 107, 139, 0.3);
+  }
+
+  .birthday-text {
+    @apply text-center leading-relaxed font-bold;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  .birthday-title {
+    @apply text-4xl md:text-6xl font-black mb-6;
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9) !important;
+    background: none !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+
+  .birthday-subtitle {
+    @apply text-xl md:text-2xl font-bold mb-4;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    /* Add gradient text for extra prettiness */
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Fallback for browsers that don't support background-clip */
+  @supports not (-webkit-background-clip: text) {
+    .birthday-subtitle {
+      color: #ffffff !important;
+      background: none;
+      -webkit-text-fill-color: initial;
+    }
+  }
+
+  .birthday-progress {
+    @apply w-full bg-gray-200 rounded-full h-3 overflow-hidden;
+    background: linear-gradient(90deg, 
+      rgba(255, 107, 139, 0.2) 0%, 
+      rgba(90, 62, 125, 0.2) 100%
+    );
+  }
+
+  .birthday-progress-bar {
+    @apply h-full rounded-full transition-all duration-700 ease-out;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    box-shadow: 0 0 10px rgba(255, 107, 139, 0.5);
+  }
+
+  /* Game specific styles */
+  .balloon {
+    @apply cursor-pointer rounded-full flex items-center justify-center text-white font-bold text-lg;
+    background: radial-gradient(circle at 30% 30%, 
+      rgba(255, 255, 255, 0.4), 
+      transparent 70%
+    );
+    box-shadow: 
+      0 5px 15px rgba(0, 0, 0, 0.25),
+      inset 0 2px 0 rgba(255, 255, 255, 0.4),
+      0 0 0 2px rgba(255, 255, 255, 0.2);
+    transition: all 0.2s var(--bounce-timing);
+    border: none;
+    outline: none;
+  }
+
+  .balloon:hover {
+    transform: scale(1.15) rotate(-3deg);
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.35),
+      inset 0 2px 0 rgba(255, 255, 255, 0.5),
+      0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+
+  .balloon:active {
+    transform: scale(0.95);
+  }
+
+  .memory-card {
+    @apply relative cursor-pointer rounded-xl overflow-hidden;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s var(--bounce-timing);
+    perspective: 1000px;
+  }
+
+  .memory-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .memory-card-inner {
+    @apply relative w-full h-full;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+
+  .memory-card.flipped .memory-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .memory-card-face {
+    @apply absolute inset-0 flex items-center justify-center text-4xl font-bold rounded-xl;
+    backface-visibility: hidden;
+  }
+
+  .memory-card-back {
+    @apply bg-gradient-to-br from-primary to-secondary text-white;
+    transform: rotateY(180deg);
+  }
+
+  .memory-card-front {
+    background: linear-gradient(135deg, var(--accent-color), #fbbf24);
+  }
+
+  /* Special effects */
+  .confetti {
+    @apply absolute pointer-events-none;
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+  }
+
+  .sparkle {
+    @apply absolute pointer-events-none;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 50%;
+  }
+
+  /* Animations */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(255, 107, 139, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 20px rgba(255, 107, 139, 0);
+    }
+  }
+
+  /* Responsive text */
+  .responsive-text {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .responsive-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-gradient-birthday {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  }
+
+  .border-gradient {
+    border: 2px solid transparent;
+    background: linear-gradient(var(--background-color), var(--background-color)) padding-box,
+                linear-gradient(135deg, var(--primary-color), var(--secondary-color)) border-box;
+  }
+
+  .shadow-birthday {
+    box-shadow: 0 10px 40px rgba(255, 107, 139, 0.3);
+  }
+
+  .shadow-birthday-lg {
+    box-shadow: 0 25px 50px rgba(255, 107, 139, 0.4);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a1a2e;
+    --text-color: #ffffff;
+  }
+  
+  .birthday-card {
+    @apply bg-gray-900;
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .birthday-text {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  .birthday-title {
+    color: #ffffff !important;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9) !important;
+  }
+
+  .birthday-subtitle {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .birthday-container {
+    @apply text-black bg-white;
+  }
+  
+  .birthday-button {
+    @apply border-2 border-black text-black bg-transparent;
+  }
+}
